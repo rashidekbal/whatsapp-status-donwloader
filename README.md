@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-"# test" 
-=======
+
 
 # 📥 WhatsApp Status Downloader
 
