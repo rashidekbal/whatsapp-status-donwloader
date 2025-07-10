@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_330">
+    <LinearLayout
+        android:id="@+id/downloadBtn"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:elevation="5dp"
+        android:background="@drawable/circle_white"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:clickable="true"
+        android:focusable="true"
+
+        >
+        <ImageView
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="match_parent"
+            android:src="@drawable/download"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/playBtn"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:src="@drawable/play"
+        android:elevation="2dp"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:focusable="true"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_launcher_background"
+        android:background="@drawable/round_edges"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_marginHorizontal="@dimen/dp_5"
+        android:layout_marginVertical="@dimen/dp_5"/>
+
+</RelativeLayout>
