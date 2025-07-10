@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/guideTitleBar"
+   android:layout_height="match_parent"
+    android:clipToOutline="true"
+>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/mainTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/usage_guide"
-            android:textColor="@color/dark_green"
-            android:textSize="@dimen/sp_18"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_25"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Now Save Status with Ease"
-            android:layout_below="@+id/mainTitle"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/light_grey"/>
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/instruction"
-        />
+        android:orientation="vertical"
+      >
+        <RelativeLayout
+            android:id="@+id/guideTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/mainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usage_guide"
+                android:textColor="@color/dark_green"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_25"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/slogan"
+                android:layout_below="@+id/mainTitle"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/light_grey"/>
+            <ImageView
+                android:id="@+id/closebtn"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/cancel"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/instruction"
+            />
 
-</LinearLayout>
+    </LinearLayout>
+</FrameLayout>

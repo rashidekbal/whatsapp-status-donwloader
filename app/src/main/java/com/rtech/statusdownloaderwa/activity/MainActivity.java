@@ -2,6 +2,7 @@ package com.rtech.statusdownloaderwa.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +12,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.Settings;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -72,17 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
         }else{
             if (!hasStatusFolderPermission()) {
-                new AlertDialog.Builder(this).setTitle("Android/media/com.whatsapp/WhatsApp/Media/.statuses").setMessage(" navigate to above location in upcoming tab and allow to view status")
-                        .setPositiveButton("Go to setting", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(this).setTitle("Permission Required").setMessage("StoragePermission Required for accessing status")
+                        .setPositiveButton("Provide", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String path = "primary:Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
-                                Uri initialUri = Uri.parse("content://com.android.externalstorage.documents/tree/" + Uri.encode(path));
-
-                                Intent accessFolderIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                                accessFolderIntent.putExtra("android.provider.extra.INITIAL_URI", initialUri);
-                                accessFolderIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-                                startActivityForResult(accessFolderIntent, 201);
+                                showDialogForSAF();
+                                dialog.dismiss();
                             }
                         }).setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                             @Override
@@ -101,6 +99,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private void showDialogForSAF() {
+        Dialog dialog=new Dialog(this);
+        dialog.setContentView(R.layout.storage_access_dialog);
+        dialog.setCancelable(false);
+        AppCompatButton okBtn=dialog.findViewById(R.id.getPermissionBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String path = "primary:Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
+                Uri initialUri = Uri.parse("content://com.android.externalstorage.documents/tree/" + Uri.encode(path));
+
+                Intent accessFolderIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                accessFolderIntent.putExtra("android.provider.extra.INITIAL_URI", initialUri);
+                accessFolderIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                startActivityForResult(accessFolderIntent, 201);
+                dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
+    }
+
     private void mainFunction(){
         ViewPagerAdapter viewpagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         mainXml.viewPager.setAdapter(viewpagerAdapter);
@@ -161,21 +183,19 @@ public class MainActivity extends AppCompatActivity {
             Uri treeUri = data.getData();
             String docId = DocumentsContract.getTreeDocumentId(treeUri);
             if (!docId.endsWith(".Statuses")) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Wrong Folder Selected")
-                        .setMessage("Please select the .Statuses folder inside WhatsApp Media.")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            // Relaunch picker
-                            String path = "primary:Android/media/com.whatsapp/WhatsApp/Media/.Statuses";
-                            Uri initialUri = Uri.parse("content://com.android.externalstorage.documents/tree/" + Uri.encode(path));
-
-                            Intent accessFolderIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-                            accessFolderIntent.putExtra("android.provider.extra.INITIAL_URI", initialUri);
-                            accessFolderIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-                            startActivityForResult(accessFolderIntent, 201);
-                        })
-                        .setCancelable(false)
-                        .show();
+                new AlertDialog.Builder(this).setTitle("Wrong Directory Selected").setMessage("Please follow the give Instruction")
+                        .setPositiveButton("Provide", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                showDialogForSAF();
+                                dialog.dismiss();
+                            }
+                        }).setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
                 return;
             }
 

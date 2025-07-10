@@ -5,4 +5,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottomAd">ca-app-pub-4425084715393433/1286067402</string>
     <string name="usage_guide">Usage Guide</string>
+    <string name="slogan">Now Save Status with Ease</string>
+    <string name="warning_no_status">No Status Available</string>
+    <string name="instruction_follow_request">Please Read Instructions</string>
+    <string name="how_to_use">HOW TO USE ?</string>
+    <string name="i_understood">I UnderStood</string>
+    <string name="import_steps">Import Steps</string>
 </resources>
