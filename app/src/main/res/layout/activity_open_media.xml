@@ -23,15 +23,16 @@
         android:layout_height="match_parent"
         android:layout_below="@id/appBar"
         android:layout_above="@id/downloadBtnHodler"
-        android:scaleType="fitCenter"/>
+        android:scaleType="center"
+        android:adjustViewBounds="true"/>
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/appBar"
         android:layout_above="@id/downloadBtnHodler"
         android:visibility="gone"
-        android:scaleType="fitCenter"/>
+        />
 
 
     <LinearLayout
